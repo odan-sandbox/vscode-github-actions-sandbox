@@ -1,0 +1,22 @@
+name: macos-ci
+
+on: [push]
+
+jobs:
+  vscode:
+    runs-on: macOS-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install Homebrew
+        run: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      
+      - name: Install coreutils
+        run: brew install coreutils
+      
+      - name: Install vscode
+        run: brew cask install visual-studio-code
+      
+      - name: List Extension
+        run: timeout 1m code --list-extensions
